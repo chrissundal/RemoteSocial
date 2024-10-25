@@ -1,7 +1,7 @@
 function updateProfileView() {
     document.getElementById('app').innerHTML = /*HTML*/`
     <div class="mainHeader">
-    <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/icons/menu.png"/></div>
+    <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
     <h1 onclick="redirectHomePage()">RemoteSocial</h1>
     <div class="mainMenu" onclick="redirectMessagePage()"><img src="IMG/Icons/message.png"/></div>
     </div>
