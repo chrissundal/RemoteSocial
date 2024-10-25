@@ -15,23 +15,22 @@ function closeDropdownMenu() {
 }
 window.onpopstate = function () {
     const page = location.hash.substr(1);
-    if (page.startsWith("movie-")) {
-        const movieName = page.replace("movie-", "");
-        navigateToMovie(movieName);
+    if (page.startsWith("group-")) {
+        page.replace("group-", "");
+        navigateToGroup();
+    } else if (page === "groups") {
+        navigateTogroupsMain();
     } else if (page === "home") {
         navigateToHome();
-    } else if (page === "home") {
-        navigateToHome();
-    } else if (page === "category") {
-        navigateToCategory();
-    } else if (page === "search") {
-        navigateToSearch();
-    } else if (page === "profil") {
+    } else if (page === "login") {
+        navigateToLogin();
+    } else if (page === "message") {
+        navigateToMessage();
+    } else if (page === "profile") {
         navigateToProfile();
     } else if (page.startsWith("friend-")) {
-        const friendId = page.replace("friend-", "");
-        navigateToOtherUser(friendId);
-        
+        page.replace("friend-", "");
+        navigateToOtherUser();
     } else {
         navigateToHome();
     }

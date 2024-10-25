@@ -1,6 +1,7 @@
 function redirectGroupPage(groupId){ 
     model.app.selectedGroup = groupId 
-    window.location.hash = "group";
+    let groupName = model.data.groups[model.app.selectedGroup].groupname;
+    window.location.hash = `#group-${groupName}`;
     clearFiltersAndDropdowns()
     navigateToGroup();
 }

@@ -1,6 +1,8 @@
 function redirectOtherUserPage(friendId){
     model.app.selectedOtherUser = friendId
-    window.location.hash = "friend";
+    let selectedfriend = model.data.users[model.app.selectedOtherUser].userName;
+    console.log(selectedfriend)
+    window.location.hash = `#friend-${selectedfriend}`;
     clearFiltersAndDropdowns()
     navigateToOtherUser();
 }
