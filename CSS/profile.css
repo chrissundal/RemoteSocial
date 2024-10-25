@@ -1,0 +1,76 @@
+.profileTopImage{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 5px;
+    border: 2px solid lightgrey;
+}
+.profileTopImage img{
+    height: 200px;
+}
+.mainProfileGrid{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+}
+.mainProfileName{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.mainProfileName h3 {
+    font-size: 15px;
+}
+.profileAbout {
+    background-color: dodgerblue;
+    color: white;
+    min-width: 100px;
+    max-width: 400px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+.profileBulletPoints{
+    background-color: dodgerblue;
+    color: white;
+    margin: 5px;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 5px;
+    border-radius: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+.profileGroups{
+    background-color: dodgerblue;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.firstProfileLine {
+    display: flex;
+    justify-content: space-between;
+}
+
+.innerProfileGroup{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin: 2px;
+}

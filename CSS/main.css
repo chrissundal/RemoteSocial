@@ -1,0 +1,113 @@
+button {
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 8px;
+    transition: 0.4s ease;
+    background-color: dodgerblue;
+    color: white;
+    font-size: medium;
+    font-family: 'KBPlayDate';
+    
+}
+button:hover {
+    transform: scale(1.05);
+    background-color: white;
+    color: dodgerblue;
+    cursor: pointer;
+}
+body {
+    font-family: 'KBPlayDate';
+    margin: 0px;
+    height: 100%;
+}
+.dropDownMenu {
+    position: absolute;
+    z-index: 3;
+    background-color: dodgerblue;
+    width: 200px;
+    padding: 10px;
+    border-radius: 0 0 10px 0;
+    color: white;
+    box-shadow: 5px 5px 15px gray;
+}
+.mainInnerDrop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.innerDrop {
+    border: 1px solid white;
+    border-radius: 7px;
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    text-align: center;
+    font-size: 30px;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: dodgerblue;
+    transition: 0.4s ease;
+}
+.innerDrop:hover {
+    transform: scale(1.05);
+    color: dodgerblue;
+    background-color: white;
+}
+.innerDropClose {
+    transition: 0.4s ease;
+    color: white;
+    background-color: dodgerblue;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 7px;
+    font-size: 20px;
+    padding: 7px;
+}
+.innerDropClose:hover {
+    transform: scale(1.05);
+    color: dodgerblue;
+    background-color: white;
+}
+.mainHeader {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    margin: 0px;
+    height: 9vh;
+    width: 100vw;
+    background-color: dodgerblue;
+    color: white;
+    box-shadow: 1px 1px 15px 1px gray;
+
+}
+.mainHeader h1 {
+    font-size: 3.5vh;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+.mainHeader h1:hover {
+    color: lightgray;
+    transform: scale(1.05);
+}
+.mainMenu {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 7vh;
+    height: 7vh;   
+}
+.mainMenu img {
+    width: 7vh;
+    height: 7vh;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+.mainMenu img:hover {
+    transform: scale(1.05);
+}

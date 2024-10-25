@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'KBPlayDate';
+    src: url('Font/KBPlayDate.eot');
+    src: local('KBPlayDate'),
+        url('Font/KBPlayDate.eot?#iefix') format('embedded-opentype'),
+        url('Font/KBPlayDate.woff2') format('woff2'),
+        url('Font/KBPlayDate.woff') format('woff'),
+        url('Font/KBPlayDate.ttf') format('truetype'),
+        url('Font/KBPlayDate.svg#KBPlayDate') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}

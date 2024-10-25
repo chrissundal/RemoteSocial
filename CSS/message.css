@@ -1,0 +1,238 @@
+/*Friends*/
+.friendSelectorChat {
+    width: auto;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 3px;
+}
+
+.friendIcons {
+    border: 1px solid gray;
+    border-radius: 50%;
+    height: 7vh;
+    width: 7vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.friendIcons img{
+    width: 170%;
+}
+.friendListBox {
+    background-color: dodgerblue;
+    margin: 1px;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    width: 45vw;
+    color: white;
+}
+.friendListBox button {
+    background-color: white;
+    color: dodgerblue;
+    height: 20px;
+    width: 70px;
+}
+.friendListBox button:hover {
+    background-color: dodgerblue;
+    color: white;
+}
+.friendListBox:hover {
+    background-color: rgb(27, 124, 221);
+}
+
+.FriendsContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    max-height: 75vh;
+    overflow-y: scroll;
+}
+
+/*search*/
+.InnerSearchTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.InnerSearchTop input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    border: none;
+    border-radius: 10px 0 0 10px;
+}
+.InnerSearchTop input:focus {
+    outline: none;
+    border: 1px solid dodgerblue;
+}
+.InnerSearchTop button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 27px;
+    border: none;
+    border-radius: 0 10px 10px 0;
+}
+.mainInnerSearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    height: 80vh;
+    width: 96vw;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: rgba(211, 211, 211, 0.836);
+}
+.closeSearch {
+    position: absolute;
+    right: 2vw;
+}
+.searchResultText {
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+.searchPageText{
+    width: 45vw;
+}
+.outerSearchImage {
+    border: 1px solid gray;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.outerSearchImage img {
+    width: 180%
+}
+.chatBoxSearch{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    width: 90vw;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+.searchResultBox{
+    margin: 2px;
+    display: flex;
+    background-color: dodgerblue;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 5px;
+    gap: 10px;
+    transition: 0.4s ease;
+    cursor: pointer;
+    color: white;
+}
+.searchResultBox:hover {
+    background-color: rgb(27, 124, 221);
+}
+.addFriendBtn {
+    height: 36px;
+    background-color: white;
+    color: dodgerblue;
+}
+/*Chat*/
+.showChatBox {
+    position: absolute;
+    top: auto;
+    left: 2vw;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.showChatBox img {
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+.showChatBox img:hover {
+    transform: scale(1.05);
+}
+.mainInnerChat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    height: 80vh;
+    width: 96vw;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: rgba(211, 211, 211, 0.836);
+}
+.InnerChatTop{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px;
+}
+.InnerChatTop div {
+    margin: 5px;
+    width: 80vw;
+    font-size: large;
+}
+.chatBox{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 78vh;
+    width: 90vw;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+.chatBoxInput {
+    margin: 10px;
+    display: flex;
+    font-size: 18px;
+    gap: 10px;
+}
+.chatBoxInput input {
+    width: 60vw;
+    border-radius: 8px;
+    border: none;
+    font-size: medium;
+}
+.chatInnerMessage {
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    max-width: 60vw;
+    padding: 5px;
+}
+.chatInnerMessageYou{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 5px;
+    margin-left: 28vw;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    max-width: 60vw;
+    padding: 5px;
+    overflow-wrap: break-word;
+}
+.chatInnerMessageDate {
+    font-size: x-small;
+    margin-top: 5px;
+}

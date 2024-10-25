@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="CSS/message.css">
+    <link rel="stylesheet" href="CSS/profile.css">
+    <link rel="stylesheet" href="CSS/groups.css">
+
+</head>
+<body onload="changeView()">
+    <div id="app"></div>
+
+    <script>
+        function changeView(){
+            if (model.app.currentPage == 'startPage') {
+                updateMainView()
+            }
+            else if (model.app.currentPage == 'loginPage') {
+                updateLoginView();
+            }
+            else if (model.app.currentPage == 'messagePage') {
+                updateMessageView();
+            }
+            else if (model.app.currentPage == 'profilePage') {
+                updateProfileView();
+            }
+            else if (model.app.currentPage == 'otherUserPage') {
+                updateOtherUserView();
+            }
+            else if (model.app.currentPage == 'groupPage') {
+                updateGroupView();
+            }
+            else if (model.app.currentPage == 'groupsMainPage') {
+                updategroupsMainView();
+            }
+            
+        }
+
+     </script>
+    <script src="JS/model.js"></script>
+    <script src="JS/mainController.js"></script>
+    <script src="JS/loginController.js"></script>
+    <script src="JS/profileController.js"></script>
+    <script src="JS/otherUserController.js"></script>
+    <script src="JS/groupController.js"></script>
+    <script src="JS/registerController.js"></script>
+    <script src="JS/messageController.js"></script>
+    <script src="JS/groupsMainController.js"></script>
+    <script src="JS/common.js"></script>
+    <script src="JS/mainView.js"></script>
+    <script src="JS/loginView.js"></script>
+    <script src="JS/profileView.js"></script>
+    <script src="JS/otherUserView.js"></script>
+    <script src="JS/groupView.js"></script>
+    <script src="JS/registerView.js"></script>
+    <script src="JS/messageView.js"></script>
+    <script src="JS/groupsMainView.js"></script>
+</body>
+</html>
