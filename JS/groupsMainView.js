@@ -77,11 +77,6 @@ function openGroupSearch(){
 `;
     changeView();
 }
-function closeGroupSearch(){
-    model.input.group.showInfo = '';
-    model.input.group.showResult = '';
-    changeView();
-}
 
 function createSearchGroups() {
     let searchHtml = '';

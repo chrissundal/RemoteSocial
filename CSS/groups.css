@@ -56,7 +56,7 @@
     border-radius: 10px;
     color: white;
     width: 40vh;
-    background-color: dodgerblue;
+    background-color: #1e90ff;
 }
 .groupPost img{
     border-radius: 10px;
@@ -67,4 +67,80 @@
     flex-wrap: wrap;
     justify-content: center;
     
+}
+.groupPostInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.groupPostInput input{
+    font-size: large;
+    border: none;
+    height: 25px;
+    padding: 5px;
+    margin-right: 0px;
+    border-radius: 8px 0 0 8px;
+}
+.groupPostInput button{
+    padding: 5px;
+    height: 35px;
+    margin-left: 0px;
+    border-radius: 0 8px 8px 0;
+}
+.groupAdminTools{
+    display: flex;
+    justify-content: center;
+}
+.innerGroupAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid black;
+    margin: 5px;
+    border-radius: 10px;
+}
+.adminGroupContainer{
+    position: absolute;
+    top: 10vh;
+    width: 330px;
+    z-index: 2;
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 5px;
+    max-height: 500px;
+}
+.innerAdminGroupName{
+    padding: 5px;
+    width: 200px;
+}
+.adminGroupPostContainer{
+    position: absolute;
+    top: 10vh;
+    z-index: 2;
+    background-color: lightgray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.groupPostFile::file-selector-button {
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    padding: 0;
+    margin: 10px;
+    border: none;
+    background-color: dodgerblue;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.groupExitIcon{
+    position: relative;
+    left: 30px;
+}
+.groupTopPost{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }

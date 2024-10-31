@@ -1,9 +1,12 @@
 function clearFiltersAndDropdowns(){
     model.input.group.showInfo = '';
     model.input.group.showResult = '';
-    model.app.isOpenDropdown = false;
     model.input.messages.showChatBox = '';
     model.input.messages.showResult = '';
+    model.app.isOpenDropdown = false;
+    model.input.group.adminOpen = false;
+    model.input.group.memberOpen = false;
+    model.input.group.postOpen = false;
 }
 function openDropdownMenu() {
     model.app.isOpenDropdown = true;

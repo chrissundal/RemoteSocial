@@ -12,7 +12,7 @@ const model = {
             'messagePage',
             'groupsMainPage',
         ],
-        currentPage: 'groupPage',
+        currentPage: 'profilePage',
         isOpenDropdown: false,
         isOpenSecondDropdown: false,
         isOpenChat: false
@@ -52,23 +52,24 @@ const model = {
             groupname: '',
             showResult: '',
             groupCategory: '',
-            groupAdmins: [],
-            groupMembers: [],
+            groupPost: '',
+            groupImage: '',
+            adminMessage: '',
+            adminOpen: false,
+            memberOpen: false,
+            postOpen: false,
         },
         login: {
             userId: null,
             userName: '',
             password: '',
             showLogin: ''
-        },
-        
+        },  
         search: {
             inputSearch: '',
             showSearch: [],
             searchResults: '',
         },
-
-        
     },
 
     data: {
@@ -107,7 +108,15 @@ const model = {
                     }
                 ],
                 adminPages: [],
-                myGroupPosts: [],
+                myGroupPosts: [
+                    {
+                        groupId: 0,
+                        uploadImage: "IMG/GroupIMG/FPV-race-wing-miniracewing14.jpg",
+                        userComment: "Rimelig raft byggesett",
+                        timeOfUpload: "17.10.2024 21:50:10",
+                        newMember: false,
+                    },
+                ],
                 myGroup: [1,2,3,4,5,6],
                 friendRequest: [],
             },
@@ -272,7 +281,6 @@ const model = {
                 myGroup: [],
                 friendRequest: [],
             },
-            
         ],
         groupCategory: ["FPV","Airplane","Scale","Fast","Cars","Slow","Boat","Rotor","Crawler"],
         groups: [
@@ -282,7 +290,7 @@ const model = {
                 groupCategory: ["FPV","Rotor"],
                 groupImage: "IMG/Groups/quad.jpg",
                 groupAdmins: [0],
-                groupMembers: [7],
+                groupMembers: [7,5,2],
                 groupPosts: [
                     {
                         userId: 7,
@@ -300,11 +308,11 @@ const model = {
                     },
                     {
                         userId: 0,
-                        uploadImage: "",
-                        userComment: "Fått bygd sammen denne lekre saken i dag, gleder meg til å prøve den i morgen",
-                        timeOfUpload: "21.10.2024 18:54:10",
+                        uploadImage: "IMG/GroupIMG/FPV-race-wing-miniracewing14.jpg",
+                        userComment: "Rimelig raft byggesett",
+                        timeOfUpload: "17.10.2024 21:50:10",
                         newMember: false,
-                    },
+                    }
                 ],
             },
             {

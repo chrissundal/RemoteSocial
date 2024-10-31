@@ -45,3 +45,8 @@ function joinGroup(groupId){
     )
     showGroupSearchResult()
 }
+function closeGroupSearch(){
+    model.input.group.showInfo = '';
+    model.input.group.showResult = '';
+    changeView();
+}
