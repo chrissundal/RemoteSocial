@@ -236,3 +236,14 @@
     font-size: x-small;
     margin-top: 5px;
 }
+.messageFriendRequest{
+    background-color: dodgerblue;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    border-radius: 10px;
+    padding: 5px;
+}

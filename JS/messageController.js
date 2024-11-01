@@ -19,104 +19,114 @@ function restoreScrollPosition() {
         friendSelectorChat.scrollLeft = model.input.messages.savedScrollPosition;
     }
 }
-function checkUnreadMessages(userName) {
+function checkUnreadMessages(userId) {
     let currentUser = model.data.users[model.app.loggedInUser];
-    let unreadMessages = currentUser.chatMessages.filter(message => message.sender === userName && !message.read);
+    let unreadMessages = currentUser.chatMessages.filter(message => message.sender === userId && !message.read);
     return unreadMessages.length > 0;
 }
-function checkMostMessages(userName) {
+function checkMostMessages(userId) {
     let currentUser = model.data.users[model.app.loggedInUser];
-    let totalMessages = currentUser.chatMessages.filter(message =>
-        (message.sender === userName || message.recipient === userName)
-    ).length;
+    let totalMessages = currentUser.chatMessages.filter(message => (message.sender === userId || message.recipient === userId)).length;
     return totalMessages;
 }
-function showFriendSelectBox(friendUserId){
+
+function showFriendSelectBox(friendUserId) {
     model.input.messages.selectedUserInfo = friendUserId;
-    changeView();  
+    changeView();
 }
 function closeChat() {
     model.input.messages.showChatBox = '';
     model.input.messages.selectedBorder = '';
-    updateMessageView();
+    changeView();
 }
 function sendChat(recipientUserId) {
     const timeHere = new Date().toLocaleString();
     let chatMessage = {
-        sender: model.data.users[model.app.loggedInUser].userName,
-        recipient: model.data.users[recipientUserId].userName,
+        sender: model.data.users[model.app.loggedInUser].userId,
+        recipient: recipientUserId,
         message: model.input.profile.sendChat,
         read: false,
         time: timeHere
     };
-
     model.data.users[model.app.loggedInUser].chatMessages.push(chatMessage);
     model.data.users[recipientUserId].chatMessages.push(chatMessage);
-    createChatBox(recipientUserId)
+    createChatBox(recipientUserId);
     updateMessageView();
 }
-function dummyMessage(){
+function dummyMessage() {
     const timeHere = new Date().toLocaleString();
     let chatMessage = {
-        sender: model.data.users[6].userName,
-        recipient: model.data.users[0].userName,
-        message: "dette er en dummy melding",
+        sender: 6,
+        recipient: 0,
+        message: "Dette er en dummy melding",
         read: false,
         time: timeHere
     };
-
     model.data.users[0].chatMessages.push(chatMessage);
     model.data.users[6].chatMessages.push(chatMessage);
     updateMessageView();
 }
-function searchMessageFriends(InputMessageSearch) {
-    let allUsers = model.data.users.filter(user => user.userName !== model.data.users[model.app.loggedInUser].userName);
 
-    return allUsers.filter(user => {
-        return user.userName.toLowerCase().includes(InputMessageSearch.toLowerCase()) || 
-               user.firstName.toLowerCase().includes(InputMessageSearch.toLowerCase()) || 
-               user.lastName.toLowerCase().includes(InputMessageSearch.toLowerCase());
-    });
+function searchMessageFriends(InputMessageSearch) {
+    let allUsers = model.data.users.filter(user => user.userId !== model.data.users[model.app.loggedInUser].userId);
+    return allUsers.filter(user => 
+            user.userName.toLowerCase().includes(InputMessageSearch.toLowerCase()) ||
+            user.firstName.toLowerCase().includes(InputMessageSearch.toLowerCase()) ||
+            user.lastName.toLowerCase().includes(InputMessageSearch.toLowerCase())
+    );
 }
-function showMessageSearchResult(){
+function showMessageSearchResult() {
     let InputMessageSearch = model.input.messages.search;
     model.input.messages.resultNumber = searchMessageFriends(InputMessageSearch);
-    if(model.input.messages.resultNumber.length == 0){
-        model.input.messages.showResult = `<div class="searchResultText">Ingen funnet</div>`
-    }else {
+    if (model.input.messages.resultNumber.length === 0) {
+        model.input.messages.showResult = `<div class="searchResultText">Ingen funnet</div>`;
+    } else {
         model.input.messages.showResult = createSearchUsers();
     }
-    openSearch()
+    openSearch();
     updateMessageView();
 }
-function isFriend(userName) {
-    return model.data.users[model.app.loggedInUser].friends.includes(userName);
+function isFriend(userId) {
+    return model.data.users[model.app.loggedInUser].friends.includes(userId);
 }
 function addFriend(userId) {
-    let loggedInUser = model.data.users[model.app.loggedInUser];
-    let user = model.data.users.find(user => user.userId == userId);
-
-    if (!loggedInUser.friends.includes(user.userName)) {
-        loggedInUser.friends.push(user.userName);
-        showMessageSearchResult()
-        updateMessageView();
-
-    }
+    let selectedfriend = model.data.users[userId]
+    let user = model.data.users[model.app.loggedInUser]
+    user.friendRequest.push(
+        {
+            userId: userId,
+            hasAccepted: true,
+        }
+    )
+    selectedfriend.friendRequest.push(
+        {
+            userId: model.app.loggedInUser,
+            hasAccepted: false,
+        }
+    )
+        showMessageSearchResult();
+        changeView();
 }
 function createSearchUsers() {
     let searchHtml = '';
-    for(let index = 0; index < model.input.messages.resultNumber.length; index++) {
+    for (let index = 0; index < model.input.messages.resultNumber.length; index++) {
         let user = model.input.messages.resultNumber[index];
-        let button = isFriend(user.userName) ? `<button class="addFriendBtn" onclick="createChatBox('${user.userId}')">Chat</button>` : `<button class="addFriendBtn" onclick="addFriend('${user.userId}')">Add Friend</button>`;
+        let isFriendPending = model.data.users[model.app.loggedInUser].friendRequest.find(request => request.userId === user.userId);
+        let button = isFriend(user.userId)
+            ? `<button class="addFriendBtn" onclick="createChatBox(${user.userId})">Chat</button>`
+            : isFriendPending
+                ? `<button class="addFriendBtn" disabled>Request Sent</button>`
+                : `<button class="addFriendBtn" onclick="addFriend(${user.userId})">Add Friend</button>`;
+        
         searchHtml += `
         <div class="searchResultBox">
             <div class="outerSearchImage"><img src="${user.userImage}"/></div>
             <div class="searchPageText">${user.firstName} ${user.lastName}</div>
             ${button}
         </div>
-        `;    
-        }
-        return searchHtml;
+        `;
+    }
+    return searchHtml;
 }
 function openSearch(){
     model.input.messages.showChatBox = `

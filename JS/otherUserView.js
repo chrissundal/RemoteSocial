@@ -8,7 +8,134 @@ function updateOtherUserView() {
     <div class="container">
         ${createDropdownMenu()}
         </div>
-        <h3>friend</h3>
-        <h3>bruker: ${model.app.selectedOtherUser} brukernavn: ${model.data.users[model.app.selectedOtherUser].userName}</h3>
+
+    <div class="mainProfileGrid">
+        ${friendCheck()}
+    </div>
+        
+        
     `;
 }
+function friendCheck(){
+    let selectedfriend = model.data.users[model.app.selectedOtherUser]
+    let isFriend = model.data.users[model.app.loggedInUser].friends.includes(model.app.selectedOtherUser)
+    let user = model.data.users[model.app.loggedInUser]
+    if(!isFriend){
+        html = `
+        <div class="friendCheckImage">
+        <h3>${selectedfriend.firstName} ${selectedfriend.lastName}</h3>
+        <img height= 100px src="${selectedfriend.userImage}"/>
+        </div>
+        `;
+        let friendRequestSent = selectedfriend.friendRequest.find(request => request.userId === user.userId);
+        if(!friendRequestSent){
+            html += `
+            <div class="friendCheckButton">
+            <button onclick="addFriendRequest()">Legg til venn</button>
+        </div>
+        `;
+        }else{
+            html += `
+            <div class="friendCheckButton">
+                <p>Venneforespørsel sendt</p>
+            </div>
+            `;
+        }
+    }else{
+        html = `
+        ${createFriendFirst()}
+        ${createFriendSecond()}
+        ${createFriendGroup()}
+        `;
+    }
+    return html;
+}
+function addFriendRequest(){
+    let selectedfriend = model.data.users[model.app.selectedOtherUser]
+    let user = model.data.users[model.app.loggedInUser]
+    user.friendRequest.push(
+        {
+            userId: model.app.selectedOtherUser,
+            hasAccepted: true,
+        }
+    )
+    selectedfriend.friendRequest.push(
+        {
+            userId: model.app.loggedInUser,
+            hasAccepted: false,
+        }
+    )
+    changeView();
+}
+function createFriendGroup(){
+    return`
+        <div class="profileGroups">
+            ${createGroupFriendList()}
+        </div>
+        <div class="profileGroupPost">
+            ${createGroupFriendPost()}
+        </div>
+    `;
+    }
+    function createFriendSecond(){
+        let selectedfriend = model.data.users[model.app.selectedOtherUser]
+        return`
+            <div class="secondProfileLine">
+                <div class="profileBulletPoints">
+                    <li>Brukernavn: ${selectedfriend.userName}</li>
+                    <li>Bursdag: ${selectedfriend.birthday}</li>
+                    <li>Fra: ${selectedfriend.city}</li>
+                    <li>Epost: ${selectedfriend.email}</li>
+                    <li>Liker: ${createFriendInterestsList()}</li>
+                </div>
+            </div>
+            `;
+    } 
+    function createFriendFirst(){
+        let selectedfriend = model.data.users[model.app.selectedOtherUser]
+    return `
+        <div class="firstProfileLine">
+            <div class="mainProfileName">
+                <h3>${selectedfriend.firstName} ${selectedfriend.lastName}</h3>
+                <div class="profileTopImage">    
+                    <img src="${selectedfriend.userImage}"/>
+                </div>
+            </div>
+            <div class="profileAbout">
+                    ${selectedfriend.aboutme}
+            </div>
+        </div>
+    `;
+    } 
+    function createFriendInterestsList(){
+        let html = '';
+        for(let interest of model.data.users[model.app.selectedOtherUser].interests) {
+            html+= `
+            ${interest}, 
+            `;
+        }
+        return html;
+    }
+    function createGroupFriendList(){
+        let html = '';
+        for(let groupId of model.data.users[model.app.selectedOtherUser].myGroup) {
+            html+= `
+            <div onclick="redirectGroupPage(${groupId})" class="innerProfileGroup">${model.data.groups[groupId].groupname}</div>
+            `;
+        }
+        return html;
+    }
+    function createGroupFriendPost(){
+        let html = '';
+        for(let groupPost of model.data.users[model.app.selectedOtherUser].myGroupPosts) {
+            html+= `
+            <div class="innerProfileGroupPost">
+            <div>${model.data.groups[groupPost.groupId].groupname}</div>
+            <div style="font-size: 12px">${groupPost.userComment}</div>
+            <img src="${groupPost.uploadImage}" height= 80px/>
+            <div style="font-size: 10px">${groupPost.timeOfUpload}</div>
+            </div>
+            `;
+        }
+        return html;
+    }
