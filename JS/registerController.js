@@ -32,7 +32,7 @@ function submitNewUser(){
                         friends: [],
                         favorites: [],
                         chatMessages:[],
-                        adminPages: [],
+                        isBanned: false,
                         myGroupPosts: [],
                         myGroup: [],
                         friendRequest: [], 

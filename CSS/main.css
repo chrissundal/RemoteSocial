@@ -87,8 +87,16 @@ body {
 
 }
 .mainHeader h1 {
+    position: relative;
+    top: 5px;
     font-size: 3.5vh;
-    padding: 5px;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+.mainHeader h3 {
+    position: relative;
+    bottom: 5px;
+    font-size: 2vh;
     cursor: pointer;
     transition: 0.4s ease;
 }
@@ -96,6 +104,7 @@ body {
     color: lightgray;
     transform: scale(1.05);
 }
+
 .mainMenu {
     margin-left: 10px;
     margin-right: 10px;
@@ -111,3 +120,11 @@ body {
 .mainMenu img:hover {
     transform: scale(1.05);
 }
+.stopMessage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30vh;
+    text-align: center;
+}   

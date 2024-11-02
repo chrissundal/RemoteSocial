@@ -21,7 +21,6 @@ function getUserNamePassword(){
     }
     
 }
-
 function delayLogin(){
     setTimeout(redirectHomePage, 2000)
     model.input.login.showLogin = ''

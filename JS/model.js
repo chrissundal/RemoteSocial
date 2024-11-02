@@ -2,7 +2,7 @@ const model = {
     app: {
         loggedInUser: 0,
         selectedOtherUser: 1,
-        selectedGroup: 0,
+        selectedGroup: 1,
         pages: [
             'startPage',
             'loginPage',
@@ -12,7 +12,7 @@ const model = {
             'messagePage',
             'groupsMainPage',
         ],
-        currentPage: 'otherUserPage',
+        currentPage: 'groupPage',
         isOpenDropdown: false,
         isOpenSecondDropdown: false,
         isOpenChat: false
@@ -39,6 +39,7 @@ const model = {
             search: '',
             showResult: '',
             resultNumber: '',
+            friendRequest: false,
         },
         profile: {
             profileBox: null,
@@ -107,7 +108,7 @@ const model = {
                         time: "17.10.2024 21:50:10"
                     }
                 ],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [
                     {
                         groupId: 0,
@@ -141,7 +142,7 @@ const model = {
                 friends: [0],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
                 myGroup: [2],
                 friendRequest: [],
@@ -164,7 +165,7 @@ const model = {
                 friends: [],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
                 myGroup: [],
                 friendRequest: [{
@@ -190,7 +191,7 @@ const model = {
                 friends: [],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
                 myGroup: [],
                 friendRequest: [],
@@ -213,7 +214,7 @@ const model = {
                 friends: ["chris"],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
                 myGroup: [],
                 friendRequest: [],
@@ -236,32 +237,32 @@ const model = {
                 friends: [0],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
                 myGroup: [],
                 friendRequest: [],
             },
             {
                 userId: 6,
-                userName: "modal",
-                password: "modal",
-                firstName: "Modal",
+                userName: "petter",
+                password: "123",
+                firstName: "Petter",
                 lastName: "Bamse",
                 birthday: "15.03.1996",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
-                userImage: "IMG/Users/InternalLocus.jpg",
-                aboutme: "hei, jeg heter Nils og liker droner",
-                interests: ["Droner"],
+                userImage: "IMG/Users/badminton.jpg",
+                aboutme: "hei, jeg heter Petter og liker biler",
+                interests: ["Biler"],
                 comments: [],
                 likes: [],
                 isAdmin: false,
                 friends: [0],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
-                myGroup: [],
+                myGroup: [3],
                 friendRequest: [],
             },
             {
@@ -282,7 +283,7 @@ const model = {
                 friends: [0],
                 favorites: [],
                 chatMessages:[],
-                adminPages: [],
+                isBanned: false,
                 myGroupPosts: [],
                 myGroup: [],
                 friendRequest: [],
@@ -320,15 +321,17 @@ const model = {
                         newMember: false,
                     }
                 ],
+                groupBanned: [],
             },
             {
                 groupId: 1,
                 groupname: "FPV Wings",
                 groupCategory: ["FPV", "Airplane"],
                 groupImage: "IMG/Groups/wing.jpg",
-                groupAdmins: [0],
+                groupAdmins: [],
                 groupMembers: [5],
                 groupPosts: [],
+                groupBanned: [0],
             },
             {
                 groupId: 2,
@@ -338,6 +341,7 @@ const model = {
                 groupAdmins: [0],
                 groupMembers: [0,3],
                 groupPosts: [],
+                groupBanned: [],
             },
             {
                 groupId: 3,
@@ -347,6 +351,7 @@ const model = {
                 groupAdmins: [0],
                 groupMembers: [0,2],
                 groupPosts: [],
+                groupBanned: [],
             },
             {
                 groupId: 4,
@@ -356,6 +361,7 @@ const model = {
                 groupAdmins: [0],
                 groupMembers: [0,1],
                 groupPosts: [],
+                groupBanned: [],
             },
             {
                 groupId: 5,
@@ -365,6 +371,7 @@ const model = {
                 groupAdmins: [0],
                 groupMembers: [0,1],
                 groupPosts: [],
+                groupBanned: [],
             },
             {
                 groupId: 6,
@@ -374,6 +381,7 @@ const model = {
                 groupAdmins: [0],
                 groupMembers: [0,1],
                 groupPosts: [],
+                groupBanned: [],
             },
             {
                 groupId: 7,
@@ -383,6 +391,7 @@ const model = {
                 groupAdmins: [0],
                 groupMembers: [0,1],
                 groupPosts: [],
+                groupBanned: [],
             },
         ]
     }

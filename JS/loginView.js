@@ -11,7 +11,17 @@ function updateLoginView(){
             </div>
         </div>
     </div>
-    `;
-    
+    `;   
 }
-
+function checkIfBannedFromSite(){
+    let loggedInUser = model.data.users[model.app.loggedInUser];
+    if(loggedInUser.isBanned){
+    document.getElementById('app').innerHTML = `
+        <div class="stopMessage">
+        <img src="IMG/Icons/stop.png" height=150px/>
+        Wow!<br> Du må virkelig ha gjort noen forbannet!
+        <br>Du er ikke ønsket her...
+        </div>
+        `;
+    }
+}

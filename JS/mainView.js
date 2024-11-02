@@ -1,16 +1,16 @@
 function updateMainView() {
     document.getElementById('app').innerHTML = /*HTML*/`
     <div class="mainHeader">
-    <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
-    <h1 onclick="redirectHomePage()">RemoteSocial</h1>
+    ${createMainHeader()}
     <div class="mainMenu" onclick="redirectMessagePage()"><img src="IMG/Icons/message.png"/></div>
     </div>
     <div class="container">
-        ${createDropdownMenu()}
-        </div>
-        <h3>Forside</h3>
-        <h3>bruker: ${model.app.loggedInUser} brukernavn: ${model.data.users[model.app.loggedInUser].userName}</h3>
+    ${createDropdownMenu()}
+    </div>
+    <h3>Forside</h3>
+    <h3>bruker: ${model.app.loggedInUser} brukernavn: ${model.data.users[model.app.loggedInUser].userName}</h3>
     `;
+    checkIfBannedFromSite();
 }
 
 function createDropdownMenu() {
@@ -27,3 +27,21 @@ function createDropdownMenu() {
     </div>
     `;
 }
+function createMainHeader(){
+    let html = '';
+    if(model.data.users[model.app.loggedInUser].isAdmin){
+        html = `
+        <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
+        <div style="MainHeaderLogo">
+            <h1 onclick="redirectHomePage()">RemoteSocial</h1>
+            <h3>ADMIN</h3>
+        </div>
+        `;
+        }else{
+        html = `
+        <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
+        <h1 onclick="redirectHomePage()">RemoteSocial</h1>
+        `;
+        }
+        return html;
+    }

@@ -1,20 +1,15 @@
 function updateOtherUserView() {
     document.getElementById('app').innerHTML = /*HTML*/`
     <div class="mainHeader">
-    <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
-    <h1 onclick="redirectHomePage()">RemoteSocial</h1>
-    <div class="mainMenu" onclick="redirectMessagePage()"><img src="IMG/Icons/message.png"/></div>
+        ${createMainHeader()}
+        <div class="mainMenu" onclick="redirectMessagePage()"><img src="IMG/Icons/message.png"/></div>
     </div>
-    <div class="container">
-        ${createDropdownMenu()}
-        </div>
-
+    <div class="container">${createDropdownMenu()}</div>
     <div class="mainProfileGrid">
         ${friendCheck()}
     </div>
-        
-        
     `;
+    checkIfBannedFromSite();
 }
 function friendCheck(){
     let selectedfriend = model.data.users[model.app.selectedOtherUser]
@@ -23,8 +18,8 @@ function friendCheck(){
     if(!isFriend){
         html = `
         <div class="friendCheckImage">
-        <h3>${selectedfriend.firstName} ${selectedfriend.lastName}</h3>
-        <img height= 100px src="${selectedfriend.userImage}"/>
+            <h3>${selectedfriend.firstName} ${selectedfriend.lastName}</h3>
+            <img height= 100px src="${selectedfriend.userImage}"/>
         </div>
         `;
         let friendRequestSent = selectedfriend.friendRequest.find(request => request.userId === user.userId);
@@ -130,10 +125,10 @@ function createFriendGroup(){
         for(let groupPost of model.data.users[model.app.selectedOtherUser].myGroupPosts) {
             html+= `
             <div class="innerProfileGroupPost">
-            <div>${model.data.groups[groupPost.groupId].groupname}</div>
-            <div style="font-size: 12px">${groupPost.userComment}</div>
-            <img src="${groupPost.uploadImage}" height= 80px/>
-            <div style="font-size: 10px">${groupPost.timeOfUpload}</div>
+                <div>${model.data.groups[groupPost.groupId].groupname}</div>
+                <div style="font-size: 12px">${groupPost.userComment}</div>
+                <img src="${groupPost.uploadImage}" height= 80px/>
+                <div style="font-size: 10px">${groupPost.timeOfUpload}</div>
             </div>
             `;
         }

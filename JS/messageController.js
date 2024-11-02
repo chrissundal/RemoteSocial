@@ -51,7 +51,7 @@ function sendChat(recipientUserId) {
     model.data.users[model.app.loggedInUser].chatMessages.push(chatMessage);
     model.data.users[recipientUserId].chatMessages.push(chatMessage);
     createChatBox(recipientUserId);
-    updateMessageView();
+    changeView();
 }
 function dummyMessage() {
     const timeHere = new Date().toLocaleString();
@@ -64,7 +64,7 @@ function dummyMessage() {
     };
     model.data.users[0].chatMessages.push(chatMessage);
     model.data.users[6].chatMessages.push(chatMessage);
-    updateMessageView();
+    changeView();
 }
 
 function searchMessageFriends(InputMessageSearch) {
@@ -84,7 +84,7 @@ function showMessageSearchResult() {
         model.input.messages.showResult = createSearchUsers();
     }
     openSearch();
-    updateMessageView();
+    changeView();
 }
 function isFriend(userId) {
     return model.data.users[model.app.loggedInUser].friends.includes(userId);
@@ -107,41 +107,32 @@ function addFriend(userId) {
         showMessageSearchResult();
         changeView();
 }
-function createSearchUsers() {
-    let searchHtml = '';
-    for (let index = 0; index < model.input.messages.resultNumber.length; index++) {
-        let user = model.input.messages.resultNumber[index];
-        let isFriendPending = model.data.users[model.app.loggedInUser].friendRequest.find(request => request.userId === user.userId);
-        let button = isFriend(user.userId)
-            ? `<button class="addFriendBtn" onclick="createChatBox(${user.userId})">Chat</button>`
-            : isFriendPending
-                ? `<button class="addFriendBtn" disabled>Request Sent</button>`
-                : `<button class="addFriendBtn" onclick="addFriend(${user.userId})">Add Friend</button>`;
-        
-        searchHtml += `
-        <div class="searchResultBox">
-            <div class="outerSearchImage"><img src="${user.userImage}"/></div>
-            <div class="searchPageText">${user.firstName} ${user.lastName}</div>
-            ${button}
-        </div>
-        `;
-    }
-    return searchHtml;
+
+function rejectFriendRequest(friendId){
+    let loggedInUser = model.data.users[model.app.loggedInUser]
+    let friend = model.data.users[friendId]
+    let myIndex = loggedInUser.friendRequest.findIndex(request => request.userId === friendId)
+    let friendIndex = friend.friendRequest.findIndex(request => request.userId === model.app.loggedInUser)
+    loggedInUser.friendRequest.splice(myIndex, 1)
+    friend.friendRequest.splice(friendIndex, 1)
+    changeView();
 }
-function openSearch(){
-    model.input.messages.showChatBox = `
-    <div class="showChatBox">
-            <div class="mainInnerSearch">
-                <div class="InnerSearchTop">
-                    <input type="text" placeholder="Søk etter venn" oninput="model.input.messages.search=this.value"/>
-                    <button onclick="showMessageSearchResult()">Søk</button>
-                </div>
-                    <img src="IMG/Icons/x.png" class="closeSearch" height = 40px onclick="closeChat()"/>
-                    <div class="chatBoxSearch">
-                        ${model.input.messages.showResult}
-                    </div>
-            </div>
-        </div>
-`;
-    updateMessageView();
+function acceptFriendRequest(friendId){
+    let loggedInUser = model.data.users[model.app.loggedInUser]
+    let friend = model.data.users[friendId]
+    loggedInUser.friends.push(friendId)
+    friend.friends.push(model.app.loggedInUser)
+    let myIndex = loggedInUser.friendRequest.findIndex(request => request.userId === friendId)
+    let friendIndex = friend.friendRequest.findIndex(request => request.userId === model.app.loggedInUser)
+    loggedInUser.friendRequest.splice(myIndex, 1)
+    friend.friendRequest.splice(friendIndex, 1)
+    changeView();
+}
+function openFriendRequest(){
+    model.input.messages.friendRequest = true;
+    changeView();
+}
+function closeFriendRequest(){
+    model.input.messages.friendRequest = false;
+    changeView();
 }

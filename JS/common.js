@@ -3,10 +3,12 @@ function clearFiltersAndDropdowns(){
     model.input.group.showResult = '';
     model.input.messages.showChatBox = '';
     model.input.messages.showResult = '';
+    model.input.messages.resultNumber = '';
     model.app.isOpenDropdown = false;
     model.input.group.adminOpen = false;
     model.input.group.memberOpen = false;
     model.input.group.postOpen = false;
+    model.input.messages.friendRequest = false;
 }
 function openDropdownMenu() {
     model.app.isOpenDropdown = true;

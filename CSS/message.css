@@ -240,10 +240,53 @@
     background-color: dodgerblue;
     color: white;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
+    gap: 5px;
     align-items: center;
     justify-content: center;
-    height: 50px;
     border-radius: 10px;
     padding: 5px;
+    width: 45vw;
+}
+.messageFriendRequest button{
+    background-color: white;
+    width: 65px;
+    color: dodgerblue;
+}
+.friendRequestContainer{
+    position: absolute;
+    top: 20vh;
+    width: 94vw;
+    margin: 0;
+    border-radius: 10px;
+    z-index: 2;
+    background-color: lightgray;
+    padding: 10px;
+    color: white;
+}
+.innerfriendRequest{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+    text-align: center;
+}
+.FriendRequestGrid{
+    display: flex;
+    justify-content: center;
+}
+.FriendRequestImage{
+   border-radius: 50%;
+   overflow: hidden;
+   height: 40px;
+   width: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center; 
+}
+.friendRequestTop{
+    gap: 10px;
+    display: flex;
+    align-items: center;
 }

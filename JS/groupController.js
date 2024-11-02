@@ -33,12 +33,17 @@ function closePostGroup() {
     model.input.group.postOpen = false;
     changeView();
 }
-function kickMember(userId){
+function kickMember(userId) {
     let group = model.data.groups[model.app.selectedGroup];
+    let member = model.data.users[userId];
+    let memberIndex = member.myGroup.indexOf(model.app.selectedGroup);
     let index = group.groupMembers.indexOf(userId);
-    group.groupMembers.splice(index, 1);
+    if (memberIndex > -1) member.myGroup.splice(memberIndex, 1);
+    if (index > -1) group.groupMembers.splice(index, 1);
+    group.groupBanned.push(userId);
     changeView();
 }
+
 function makeAdmin(userId){
     model.data.groups[model.app.selectedGroup].groupAdmins.push(userId)
     changeView();
@@ -74,5 +79,19 @@ function postMessage(){
         }
     )
     model.input.group.postOpen = false;
+    changeView();
+}
+function deleteGroupPost(postIndex) {
+    let group = model.data.groups[model.app.selectedGroup];
+    group.groupPosts.splice(postIndex, 1);
+    changeView();
+}
+function leaveGroup(){
+    let user = model.data.users[model.app.loggedInUser];
+    let group = model.data.groups[model.app.selectedGroup];
+    let index = user.myGroup.indexOf(model.app.selectedGroup)
+    let groupIndex = group.groupMembers.indexOf(model.app.loggedInUser)
+    if (index > -1) user.myGroup.splice(index, 1);
+    if (groupIndex > -1) group.groupMembers.splice(groupIndex, 1);
     changeView();
 }

@@ -1,18 +1,17 @@
 function updateProfileView() {
     document.getElementById('app').innerHTML = /*HTML*/`
     <div class="mainHeader">
-    <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
-    <h1 onclick="redirectHomePage()">RemoteSocial</h1>
-    <div class="mainMenu" onclick="redirectMessagePage()"><img src="IMG/Icons/message.png"/></div>
+        ${createMainHeader()}
+        <div class="mainMenu" onclick="redirectMessagePage()"><img src="IMG/Icons/message.png"/></div>
     </div>
     <div class="container">${createDropdownMenu()}</div>
-    
     <div class="mainProfileGrid">
         ${createProfileFirst()}
         ${createProfileSecond()}
         ${createProfileGroup()}
     </div>
     `;
+    checkIfBannedFromSite();
 }
 function createProfileGroup(){
 return`
@@ -75,10 +74,10 @@ function createGroupPost(){
     for(let groupPost of model.data.users[model.app.loggedInUser].myGroupPosts) {
         html+= `
         <div class="innerProfileGroupPost">
-        <div>${model.data.groups[groupPost.groupId].groupname}</div>
-        <div style="font-size: 12px">${groupPost.userComment}</div>
-        <img src="${groupPost.uploadImage}" height= 80px/>
-        <div style="font-size: 10px">${groupPost.timeOfUpload}</div>
+            <div>${model.data.groups[groupPost.groupId].groupname}</div>
+            <div style="font-size: 12px">${groupPost.userComment}</div>
+            <img src="${groupPost.uploadImage}" height= 80px/>
+            <div style="font-size: 10px">${groupPost.timeOfUpload}</div>
         </div>
         `;
     }

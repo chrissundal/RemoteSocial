@@ -4,17 +4,17 @@ function updateGroupView() {
     let isMember = group.groupMembers.includes(user.userId)
     let showMember = isMember ? `<img src="IMG/Icons/plus.png" onclick="openPostGroup()"/>` : ''
     document.getElementById('app').innerHTML = `
-        <div class="mainHeader">
-            <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
-            <h1 onclick="redirectHomePage()">RemoteSocial</h1>
-            <div class="mainMenu">${showMember}</div>
-        </div>
-        <div class="container">${createDropdownMenu()}</div>
-        <div class="groupfeedGrid">
-            <h3>${group.groupname}</h3>
-            ${checkMemberAndAdmin()}
-        </div>
+    <div class="mainHeader">
+    ${createMainHeader()}
+    <div class="mainMenu">${showMember}</div>
+    </div>
+    <div class="container">${createDropdownMenu()}</div>
+    <div class="groupfeedGrid">
+    <h3>${group.groupname}</h3>
+    ${checkMemberAndAdmin()}
+    </div>
     `;
+    checkIfBannedFromSite();
 }    
 function checkMemberAndAdmin(){
     let html = '';
@@ -35,7 +35,13 @@ function checkMemberAndAdmin(){
         <div class="groupFeed">
             ${addPostGroup() ?? ''}
             ${createGroupFeed()}
+            <button onclick="leaveGroup()">Forlat gruppen</button>
         </div>
+        `;
+    }else if(group.groupBanned.includes(user.userId)){
+        html = `
+        <img src="IMG/Icons/stop.png" height=150px/>
+        Du er ikke ønsket i denne gruppen!
         `;
     }else{
         html=`Bli medlem for å få tilgang til denne gruppen!
@@ -136,7 +142,12 @@ function createAdminMemberChoices(){
 
 function createGroupFeed(){
     let html = '';
-    for(let groupPost of model.data.groups[model.app.selectedGroup].groupPosts){
+    let user = model.data.users[model.app.loggedInUser]
+    let group = model.data.groups[model.app.selectedGroup];
+    let checkAdmin = model.data.groups[model.app.selectedGroup].groupAdmins.includes(user.userId)
+    for(let i = group.groupPosts.length -1 ; i >= 0; i--){
+        let groupPost = group.groupPosts[i];
+        let isAdmin = checkAdmin ? `<img class="groupDeletePostIcon" src="IMG/Icons/x.png" height=30px onclick="deleteGroupPost(${i})"/>` : ''
         let isNewMember = groupPost.newMember 
         ? `<div onclick="redirectOtherUserPage(${groupPost.userId})"><strong>${model.data.users[groupPost.userId].firstName} ${model.data.users[groupPost.userId].lastName} er nytt medlem</strong></div>` 
         : `<div onclick="redirectOtherUserPage(${groupPost.userId})"><strong>${model.data.users[groupPost.userId].firstName} ${model.data.users[groupPost.userId].lastName}</strong></div>`
@@ -146,6 +157,7 @@ function createGroupFeed(){
                 <div>${groupPost.userComment}</div>
                 <div><img src="${groupPost.uploadImage ?? ''}" height = "100px"/></div>
                 <div style="font-Size: 10px">${groupPost.timeOfUpload}</div>
+                ${isAdmin}
             </div>
         `;
     }

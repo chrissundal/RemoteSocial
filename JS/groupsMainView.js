@@ -1,18 +1,16 @@
 function updategroupsMainView() {
     document.getElementById('app').innerHTML = /*HTML*/`
     <div class="mainHeader">
-    <div class="mainMenu" onclick="openDropdownMenu()"><img src="IMG/Icons/menu.png"/></div>
-    <h1 onclick="redirectHomePage()">RemoteSocial</h1>
-    <div class="mainMenu" onclick="openGroupSearch()"><img src="IMG/Icons/search.png"/></div>
+        ${createMainHeader()}
+        <div class="mainMenu" onclick="openGroupSearch()"><img src="IMG/Icons/search.png"/></div>
     </div>
-    <div class="container">
-        ${createDropdownMenu()}
-        </div>
-        ${model.input.group.showInfo}
-        <div class="groupsGrid">
+    <div class="container">${createDropdownMenu()}</div>
+    ${model.input.group.showInfo}
+    <div class="groupsGrid">
         ${createMainGroups()}
-        </div>
+    </div>
     `;
+    checkIfBannedFromSite();
 }
 function createMainGroups(){
     let html='';
@@ -37,11 +35,11 @@ function openCategory(index, name){
     }
     model.input.group.showInfo = `
     <div class="showGroupBox">
-    <div class="mainInnerGroups">
-    ${model.data.groupCategory[index]}
-    <img src="IMG/Icons/x.png" class="closeSearch" height = 40px onclick="closeGroupSearch()"/>
-    <div style="margin-top: 20px">${showGroups ?? ''}</div>        
-    </div>
+        <div class="mainInnerGroups">
+            ${model.data.groupCategory[index]}
+            <img src="IMG/Icons/x.png" class="closeSearch" height = 40px onclick="closeGroupSearch()"/>
+            <div style="margin-top: 20px">${showGroups ?? ''}</div>        
+        </div>
     </div>
     `;
     changeView();
