@@ -9,6 +9,7 @@ function clearFiltersAndDropdowns(){
     model.input.group.memberOpen = false;
     model.input.group.postOpen = false;
     model.input.messages.friendRequest = false;
+    model.input.frontPage.adminMenu = false;
 }
 function openDropdownMenu() {
     model.app.isOpenDropdown = true;

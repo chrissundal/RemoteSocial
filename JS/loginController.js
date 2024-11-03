@@ -13,11 +13,9 @@ function getUserNamePassword(){
         model.input.login.showLogin = 'Sender deg videre...'
         updateLoginView()
         delayLogin()
-        console.log(user)
     }else{
         model.input.login.showLogin = 'Feil passord eller brukernavn'
         updateLoginView()
-        console.log("ikke likt")
     }
     
 }

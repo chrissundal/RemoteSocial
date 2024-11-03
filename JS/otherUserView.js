@@ -15,36 +15,46 @@ function friendCheck(){
     let selectedfriend = model.data.users[model.app.selectedOtherUser]
     let isFriend = model.data.users[model.app.loggedInUser].friends.includes(model.app.selectedOtherUser)
     let user = model.data.users[model.app.loggedInUser]
-    if(!isFriend){
-        html = `
-        <div class="friendCheckImage">
+    if(!selectedfriend.isBanned){
+        if(!isFriend){
+            html = `
+            <div class="friendCheckImage">
             <h3>${selectedfriend.firstName} ${selectedfriend.lastName}</h3>
             <img height= 100px src="${selectedfriend.userImage}"/>
-        </div>
-        `;
-        let friendRequestSent = selectedfriend.friendRequest.find(request => request.userId === user.userId);
-        if(!friendRequestSent){
-            html += `
-            <div class="friendCheckButton">
-            <button onclick="addFriendRequest()">Legg til venn</button>
-        </div>
-        `;
-        }else{
-            html += `
-            <div class="friendCheckButton">
-                <p>Venneforespørsel sendt</p>
             </div>
+            `;
+            let friendRequestSent = selectedfriend.friendRequest.find(request => request.userId === user.userId);
+            if(!friendRequestSent){
+                html += `
+                <div class="friendCheckButton">
+                <button onclick="addFriendRequest()">Legg til venn</button>
+                </div>
+                `;
+            }else{
+                html += `
+                <div class="friendCheckButton">
+                <p>Venneforespørsel sendt</p>
+                </div>
+                `;
+            }
+        }else{
+            html = `
+            ${createFriendFirst()}
+            ${createFriendSecond()}
+            ${createFriendGroup()}
             `;
         }
     }else{
         html = `
-        ${createFriendFirst()}
-        ${createFriendSecond()}
-        ${createFriendGroup()}
-        `;
+                <div class="friendCheckButton">
+                <img src="IMG/Icons/stop.png" height=150px/>
+                <p>Brukeren er bannet</p>
+                </div>
+                `;
     }
     return html;
 }
+
 function addFriendRequest(){
     let selectedfriend = model.data.users[model.app.selectedOtherUser]
     let user = model.data.users[model.app.loggedInUser]
@@ -74,11 +84,12 @@ function createFriendGroup(){
     }
     function createFriendSecond(){
         let selectedfriend = model.data.users[model.app.selectedOtherUser]
+        let formattedBirthday = new Date(selectedfriend.birthday).toLocaleDateString();
         return`
             <div class="secondProfileLine">
                 <div class="profileBulletPoints">
                     <li>Brukernavn: ${selectedfriend.userName}</li>
-                    <li>Bursdag: ${selectedfriend.birthday}</li>
+                    <li>Bursdag: ${formattedBirthday}</li>
                     <li>Fra: ${selectedfriend.city}</li>
                     <li>Epost: ${selectedfriend.email}</li>
                     <li>Liker: ${createFriendInterestsList()}</li>

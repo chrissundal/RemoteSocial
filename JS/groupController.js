@@ -59,14 +59,15 @@ function readFilePostGroup(input) {
     }
 }
 function postMessage(){
-    let timeHere = new Date().toLocaleString();
+    let currentTime = new Date()
     model.data.groups[model.app.selectedGroup].groupPosts.push(
         {
             userId: model.app.loggedInUser,
             uploadImage: model.input.group.groupImage,
             userComment: model.input.group.groupPost,
-            timeOfUpload: timeHere,
+            timeOfUpload: currentTime.toLocaleString(),
             newMember: false,
+            realTime: currentTime 
         }
     )
     model.data.users[model.app.loggedInUser].myGroupPosts.push(
@@ -74,8 +75,9 @@ function postMessage(){
             groupId: model.app.selectedGroup,
             uploadImage: model.input.group.groupImage,
             userComment: model.input.group.groupPost,
-            timeOfUpload: timeHere,
+            timeOfUpload: currentTime.toLocaleString(),
             newMember: false,
+            realTime: currentTime
         }
     )
     model.input.group.postOpen = false;

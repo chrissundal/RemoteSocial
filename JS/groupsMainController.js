@@ -30,7 +30,7 @@ function isMember(group, userId) {
     return group.groupMembers.includes(userId);
 }
 function joinGroup(groupId){
-    let thisTime = new Date().toLocaleString()
+    let currentTime = new Date()
     let user = model.data.users[model.app.loggedInUser]
     user.myGroup.push(groupId)
     model.data.groups[groupId].groupMembers.push(user.userId)
@@ -39,8 +39,9 @@ function joinGroup(groupId){
             userId: user.userId,
             uploadImage: "",
             userComment: "",
-            timeOfUpload: thisTime,
+            timeOfUpload: currentTime.toLocaleString(),
             newMember: true,
+            realTime: currentTime 
         }
     )
     showGroupSearchResult()

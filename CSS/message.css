@@ -268,9 +268,14 @@
 .innerfriendRequest{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+    margin-bottom: 10px;
     text-align: center;
+}
+.innerfriendRequest img{
+    position: absolute;
+    right: 0px;
 }
 .FriendRequestGrid{
     display: flex;

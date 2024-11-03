@@ -1,6 +1,31 @@
-function submitNewUser(){
+function handleRegistration(registerUser) {
+    if (validateRegistrationFields(registerUser)) {
+        if (!isExistingUser(registerUser.userName)) {
+            if (registerUser.password === registerUser.secondpassword) {
+                createNewUser(registerUser);
+                blankRegisterFields();
+                model.input.login.showLogin = `Registrering fullført`;
+                updateLoginView();
+            } else {
+                model.input.login.showLogin = `Passord ikke likt`;
+                registerNewUser();
+            }
+        } else {
+            model.input.login.showLogin = `Brukernavn allerede tatt`;
+            registerNewUser();
+        }
+    } else {
+        model.input.login.showLogin = `Alle felter må fylles ut`;
+        registerNewUser();
+    }
+}
+function submitNewUser() {
     let registerUser = model.input.register;
-    if(registerUser.userName 
+    handleRegistration(registerUser);
+}
+
+function validateRegistrationFields(registerUser) {
+    return registerUser.userName 
         && registerUser.password 
         && registerUser.firstName 
         && registerUser.lastName 
@@ -9,54 +34,48 @@ function submitNewUser(){
         && registerUser.email
         && registerUser.userImage 
         && registerUser.aboutme 
-        && registerUser.secondpassword) {
-        let existingUser = model.data.users.find(user => user.userName === registerUser.userName);
-        if (!existingUser) {
-            if (registerUser.password === registerUser.secondpassword) {
-                let newUserId = model.data.users.length;
-                model.data.users.push(
-                    {
-                        userId: newUserId,
-                        userName: model.input.register.userName,
-                        password: model.input.register.password,
-                        firstName: model.input.register.firstName,
-                        lastName: model.input.register.lastName,
-                        birthday: model.input.register.birthday,
-                        city: model.input.register.city,
-                        email: model.input.register.email,
-                        userImage: model.input.register.userImage,
-                        aboutme: model.input.register.aboutme,
-                        interests: [],
-                        comments: [],
-                        isAdmin: false,
-                        friends: [],
-                        favorites: [],
-                        chatMessages:[],
-                        isBanned: false,
-                        myGroupPosts: [],
-                        myGroup: [],
-                        friendRequest: [], 
-                    }
-                );   
-                model.input.register.userName = '';
-                model.input.register.password = '';
-                model.input.register.secondpassword = '';
-                model.input.register.userImage = '';
-                model.input.register.aboutme = '';
-                model.input.login.showLogin = `Registrering fullført`;
-                updateLoginView();
-            }else{
-                model.input.login.showLogin = `Passord ikke likt`;
-                registerNewUser();
-            }
-        }else{
-            model.input.login.showLogin = `Brukernavn allerede tatt`;
-            registerNewUser();
-        }
-    }else{
-        model.input.login.showLogin = `Alle felter må fylles ut`;
-        registerNewUser();
-    }
+        && registerUser.secondpassword;
+}
+function isExistingUser(userName) {
+    return model.data.users.find(user => user.userName === userName);
+}
+function createNewUser(registerUser) {
+    let newUserId = model.data.users.length;
+    model.data.users.push({
+        userId: newUserId,
+        userName: registerUser.userName,
+        password: registerUser.password,
+        firstName: registerUser.firstName,
+        lastName: registerUser.lastName,
+        birthday: registerUser.birthday,
+        city: registerUser.city,
+        email: registerUser.email,
+        userImage: registerUser.userImage,
+        aboutme: registerUser.aboutme,
+        interests: [],
+        comments: [],
+        isAdmin: false,
+        friends: [],
+        favorites: [],
+        chatMessages: [],
+        isBanned: false,
+        myGroupPosts: [],
+        myGroup: [],
+        friendRequest: []
+    });
+}
+
+function blankRegisterFields(){
+    model.input.register.userName = '';
+    model.input.register.password = '';
+    model.input.register.secondpassword = '';
+    model.input.register.userImage = '';
+    model.input.register.aboutme = '';
+    model.input.register.firstName = '';
+    model.input.register.lastName = '';
+    model.input.register.birthday = '';
+    model.input.register.city = '';
+    model.input.register.emai = '';
 }
 function cancelNewUser() {
     model.input.login.showLogin = '';

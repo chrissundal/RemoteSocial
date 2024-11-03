@@ -24,11 +24,13 @@ return`
 `;
 }
 function createProfileSecond(){
+let userBirthday = model.data.users[model.app.loggedInUser].birthday;
+let formattedBirthday = new Date(userBirthday).toLocaleDateString();
 return`
     <div class="secondProfileLine">
         <div class="profileBulletPoints">
             <li>Brukernavn: ${model.data.users[model.app.loggedInUser].userName}</li>
-            <li>Bursdag: ${model.data.users[model.app.loggedInUser].birthday}</li>
+            <li>Bursdag: ${formattedBirthday}</li>
             <li>Fra: ${model.data.users[model.app.loggedInUser].city}</li>
             <li>Epost: ${model.data.users[model.app.loggedInUser].email}</li>
             <li>Liker: ${createInterestsList()}</li>
@@ -73,7 +75,7 @@ function createGroupPost(){
     let html = '';
     for(let groupPost of model.data.users[model.app.loggedInUser].myGroupPosts) {
         html+= `
-        <div class="innerProfileGroupPost">
+        <div class="innerProfileGroupPost" onclick="redirectGroupPage(${groupPost.groupId})">
             <div>${model.data.groups[groupPost.groupId].groupname}</div>
             <div style="font-size: 12px">${groupPost.userComment}</div>
             <img src="${groupPost.uploadImage}" height= 80px/>

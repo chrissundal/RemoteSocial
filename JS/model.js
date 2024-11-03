@@ -12,13 +12,20 @@ const model = {
             'messagePage',
             'groupsMainPage',
         ],
-        currentPage: 'groupPage',
+        currentPage: 'startPage',
         isOpenDropdown: false,
         isOpenSecondDropdown: false,
         isOpenChat: false
     },
     
     input: {
+        frontPage: {
+            adminMenu: false,
+            adminSearch: '',
+            adminSearchResult: '',
+            members: '',
+            feed: [],
+        },
         register: {
                 userName: '',
                 password: '',
@@ -81,7 +88,7 @@ const model = {
                 password: "chris",
                 firstName: "Christoffer",
                 lastName: "Jacobsen",
-                birthday: "07.09.1987",
+                birthday: "1996-05-12",
                 city: "Larvik",
                 email: "christoffersj@hotmail.com",
                 userImage: "IMG/Users/chris.jpg",
@@ -116,7 +123,16 @@ const model = {
                         userComment: "Rimelig raft byggesett",
                         timeOfUpload: "17.10.2024 21:50:10",
                         newMember: false,
+                        realTime: new Date("2024-10-17T21:50:10")
                     },
+                    {
+                        groupId: 2,
+                        uploadImage: "IMG/GroupIMG/FPV-race-wing-miniracewing14.jpg",
+                        userComment: "Rimelig raft byggesett",
+                        timeOfUpload: "25.10.2024 21:50:10",
+                        newMember: false,
+                        realTime: new Date("2024-10-25T21:50:10")
+                    }
                 ],
                 myGroup: [1,2,3,4,5,6],
                 friendRequest: [{
@@ -130,7 +146,7 @@ const model = {
                 password: "bjarne",
                 firstName: "Bjarne",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/filmfan16.jpg",
@@ -153,7 +169,7 @@ const model = {
                 password: "nils",
                 firstName: "Nils",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/user1.png",
@@ -179,7 +195,7 @@ const model = {
                 password: "svein",
                 firstName: "Svein",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/user3.jpg",
@@ -202,7 +218,7 @@ const model = {
                 password: "kåre",
                 firstName: "Kåre",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/user4.jpg",
@@ -225,7 +241,7 @@ const model = {
                 password: "tore",
                 firstName: "Tore",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/user5.jpg",
@@ -248,7 +264,7 @@ const model = {
                 password: "123",
                 firstName: "Petter",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/badminton.jpg",
@@ -271,7 +287,7 @@ const model = {
                 password: "jonas",
                 firstName: "Jonas",
                 lastName: "Bamse",
-                birthday: "15.03.1996",
+                birthday: "1996-05-12",
                 city: "Oslo",
                 email: "bjarne@getacademy.com",
                 userImage: "IMG/Users/droneentusiast.jpg",
@@ -305,6 +321,7 @@ const model = {
                         userComment: "",
                         timeOfUpload: "21.10.2024 18:54:10",
                         newMember: true,
+                        realTime: new Date("2024-10-21T18:54:10")
                     },
                     {
                         userId: 7,
@@ -312,6 +329,7 @@ const model = {
                         userComment: "Fått bygd sammen denne lekre saken i dag, gleder meg til å prøve den i morgen",
                         timeOfUpload: "21.10.2024 18:54:10",
                         newMember: false,
+                        realTime: new Date("2024-10-21T18:54:10")
                     },
                     {
                         userId: 0,
@@ -319,10 +337,12 @@ const model = {
                         userComment: "Rimelig raft byggesett",
                         timeOfUpload: "17.10.2024 21:50:10",
                         newMember: false,
+                        realTime: new Date("2024-10-17T21:50:10")
                     }
                 ],
                 groupBanned: [],
             },
+            
             {
                 groupId: 1,
                 groupname: "FPV Wings",
@@ -338,9 +358,16 @@ const model = {
                 groupname: "Airplane",
                 groupCategory: ["Scale", "Airplane"],
                 groupImage: "IMG/Groups/plane.jpg",
-                groupAdmins: [0],
+                groupAdmins: [3],
                 groupMembers: [0,3],
-                groupPosts: [],
+                groupPosts: [{
+                    userId: 0,
+                    uploadImage: "IMG/GroupIMG/FPV-race-wing-miniracewing14.jpg",
+                    userComment: "Rimelig raft byggesett",
+                    timeOfUpload: "25.10.2024 21:50:10",
+                    newMember: false,
+                    realTime: new Date("2024-10-25T21:50:10")
+                }],
                 groupBanned: [],
             },
             {
